@@ -3,13 +3,21 @@ using RepositoryContracts;
 
 namespace InMemoryRepositories;
 
-public class PostInMemoryRepository
+public class PostInMemoryRepository : IPostRepository
 {
     private readonly List<Post> posts;
 
     public PostInMemoryRepository()
     {
         posts = new List<Post>();
+        AddDummyData();
+    }
+
+    private void AddDummyData()
+    {
+        posts.Add(new Post { Id = 1, Title = "First post", Body = "This is the first dummy post.", UserId = 1 });
+        posts.Add(new Post { Id = 2, Title = "Second post", Body = "This is the second dummy post.", UserId = 2 });
+        posts.Add(new Post { Id = 3, Title = "Third post", Body = "This is the third dummy post.", UserId = 1 });
     }
 
     public Task<Post> AddAsync(Post post)
